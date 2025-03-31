@@ -9,15 +9,12 @@ from bs4 import BeautifulSoup;
 from colorama import Fore, Back, Style;
 from scripts.lib import Console as c;
 class ytd:
-  urls=[
-    'https://www.youtube.com/@5-MinuteCraftsSHORTS',
-    # 'https://www.youtube.com/@5MinuteCraftsYouTube',
-  ];
   SAVE_PATH="./content/";
   row=0;
   shortsurls=[];
   # dexe=Path(f"{os.getcwd()}\\resources\\chromedriver.exe");
-  def __init__(self):
+  def __init__(self,urls):
+    self.urls=urls;
     self.main();
   
   def setupDriver(self):
@@ -76,7 +73,7 @@ class ytd:
           for v in self.shortsurls:print(f" {Fore.CYAN} {v} {Style.RESET_ALL}");
           print(f"total length: {len(self.shortsurls)}");
           with open("videolist.json","w") as final:
-            json.dump(self.shortsurls,final);
+            json.dump(self.shortsurls,final,indent=2);
           self.driver.quit();
       else:
         self.shortsurls=json.loads(open("videolist.json","r").read());
@@ -88,6 +85,7 @@ class ytd:
             try:shutil.rmtree("./content/");
             except Exception as e:print(f"Ran into error when reseting content folder: {str(e)}");
             os.mkdir("content");
+        else:os.mkdir("content");
         c.header("Starting Video Download");
         i=0;
         for url in self.shortsurls:

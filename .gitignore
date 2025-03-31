@@ -225,4 +225,5 @@ $RECYCLE.BIN/
 
 .env
 content/*
+extracted/*
 videolist.json

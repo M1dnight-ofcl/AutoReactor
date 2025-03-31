@@ -7,13 +7,18 @@ from colorama import init as clrinit, Fore, Back, Style
 from scripts.lib import Console as c;
 
 class AutoReactor:
+  urls=[
+    # 'https://www.youtube.com/@5-MinuteCraftsSHORTS',
+    'https://www.youtube.com/@DailyDoseOfInternet',
+    # 'https://www.youtube.com/@5MinuteCraftsYouTube',
+  ];
   def __init__(self):
     # os.system('color');
     clrinit();
     load_dotenv();
     self.client=OpenAI(api_key=os.getenv("api_key"));
 
-    ytd();
+    ytd(self.urls);
     ParseVideo();
     # print(self.react("Hello World").output_text)
 
